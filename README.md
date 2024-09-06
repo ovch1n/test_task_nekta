@@ -1,6 +1,7 @@
 #Nekta test task
 
 При сборке контейнера создается 2 пользователя:
+
 С доступом к административной панели:
 ```
 {
@@ -32,7 +33,7 @@
 }
 ```
 
-Для доступа к ендпоинтам, кроме, '<server_uri>/v1/token/', необходим что-бы в header запроса был активный token в таком виде:
+Для доступа к ендпоинтам, кроме, '<server_uri>/v1/token/', необходимо что-бы в header запроса был активный token в таком виде:
 ```
 {
   "Authorization": "Token c201907d550639c3e3d14fc3d2fdfadc5a6268a3",
@@ -44,7 +45,7 @@
   - GET <server_uri>/v1/request/
 
 - Получение информации о заявке по ID
-  - GET <server_uri>/v1/request/<id>
+  - GET <server_uri>/v1/request/`<id>`
 
 - Создание заявки
   - POST <server_uri>/v1/request-add/
@@ -59,7 +60,7 @@
   
 ### Сообщения
 - Получение списка сообщений по заявке
-  - GET <server_uri>/v1/messages/<id>/
+  - GET <server_uri>/v1/messages/`<id>`/
 
 - Отправка сообщения в заявку
   - POST <server_uri>/v1/message-add/
