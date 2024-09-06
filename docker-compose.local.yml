@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgresql:
+    container_name: postgresql
+    image: postgres:16.2-alpine3.19
+    restart: always
+    networks:
+      - nekta_network
+    volumes:
+      - source: nekta_postgres_data
+        target: /var/lib/postgresql/data/
+        type: volume
+    env_file:
+      - django_setup/.env_local
+
+  webservice:
+    container_name: webservice
+    build:
+      context: .
+      dockerfile: ./django_setup/Dockerfile_local
+    restart: always
+    networks:
+      - nekta_network
+    volumes:
+      - source: ./app
+        target: /usr/src/app
+        type: bind
+    env_file:
+      - django_setup/.env_local
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgresql
+
+
+volumes:
+  nekta_postgres_data:
+    name: nekta_postgres_data
+    driver: local
+
+networks:
+  nekta_network:
+    name: nekta_network
+    attachable: true

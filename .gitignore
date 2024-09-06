@@ -1,0 +1,9 @@
+db.sqlite
+*.python_history
+.venv
+__pycache__
+media
+app/py
+/app/.cache/
+/app/.ash_history
+/app/.mysql_history

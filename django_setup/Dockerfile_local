@@ -1,0 +1,19 @@
+FROM dockerhub.timeweb.cloud/library/python:3.12.3-alpine3.18
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    HOME=/usr/src/app
+
+RUN apk add \
+    libffi-dev \
+    gcc 
+   
+RUN mkdir -p /opt/django_setup $HOME
+
+COPY ./django_setup/entrypoint_local.sh ./django_setup/database_config/local.py.example /opt/django_setup/
+
+RUN chmod +x /opt/django_setup/entrypoint_local.sh
+
+RUN cat /opt/django_setup/entrypoint_local.sh
+
+ENTRYPOINT ["sh", "/opt/django_setup/entrypoint_local.sh"]
